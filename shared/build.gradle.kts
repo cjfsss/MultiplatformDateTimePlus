@@ -7,16 +7,15 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.vanniktech.mavenPublish)
-//    id("signing") // 用于对发布的构件进行签名
 }
 
 kotlin {
     androidTarget {
-        publishLibraryVariants("release", "debug")
+        publishLibraryVariants("release")
         compilations.all {
             compileTaskProvider.configure {
                 compilerOptions {
-                    jvmTarget.set(JvmTarget.JVM_1_8)
+                    jvmTarget.set(JvmTarget.JVM_11)
                 }
             }
         }
@@ -67,8 +66,8 @@ android {
         minSdk = 24
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 group = "io.github.cjfsss"
@@ -106,14 +105,3 @@ mavenPublishing {
         }
     }
 }
-// 在 build.gradle.kts 中添加
-//signing {
-//    // 使用环境变量中的 GPG 密钥
-//    val signingKey: String? by project
-//    val signingPassword: String? by project
-//
-//    if (signingKey != null && signingPassword != null) {
-//        useInMemoryPgpKeys(signingKey, signingPassword)
-//        sign(publishing.publications["kotlinMultiplatform"])
-//    }
-//}
