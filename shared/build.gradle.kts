@@ -84,7 +84,7 @@ mavenPublishing {
         name = "Kotlinx datetime Plus"
         description = "A KMP library that provides extensions and helper functions for kotlinx-datetime."
         inceptionYear = "2025"
-        url = "https://github.com/cjfsss"
+        url = "https://github.com/cjfsss/MultiplatformDateTimePlus"
         licenses {
             license {
                 name = "MIT License"
@@ -101,8 +101,8 @@ mavenPublishing {
         }
         scm {
             url = "https://github.com/cjfsss"
-            connection = "scm:git:git://github.com/cjfsss"
-            developerConnection = "scm:git:ssh://git@github.com/cjfsss"
+            connection = "scm:git:git://github.com/cjfsss/MultiplatformDateTimePlus.git"
+            developerConnection = "scm:git:ssh://git@github.com/cjfsss/MultiplatformDateTimePlus.git"
         }
     }
 }
