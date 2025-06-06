@@ -7,11 +7,12 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.vanniktech.mavenPublish)
+//    id("signing") // 用于对发布的构件进行签名
 }
 
 kotlin {
     androidTarget {
-        publishLibraryVariants("release","debug")
+        publishLibraryVariants("release", "debug")
         compilations.all {
             compileTaskProvider.configure {
                 compilerOptions {
@@ -20,7 +21,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -70,26 +71,24 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
-group = "hos"
+group = "io.github.cjfsss"
 version = "1.0.0"
-
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-
+//    publishToMavenCentral("DEFAULT", true)
     signAllPublications()
-
-    coordinates("hos", "datetime", "1.0.0")
-
+    coordinates("io.github.cjfsss", "hos-datetime", "1.0.0")
     pom {
         name = "Kotlinx datetime Plus"
-        description = "A KMP library that provides extensions and helper functions for kotlinx-datetime."
+        description =
+            "A KMP library that provides extensions and helper functions for kotlinx-datetime."
         inceptionYear = "2025"
-        url = "https://github.com/cjfsss/MultiplatformDateTimePlus"
+        url = "https://github.com/cjfsss/MultiplatformDateTimePlus/"
         licenses {
             license {
-                name = "MIT License"
-                url = "https://opensource.org/license/mit/"
-                distribution = "https://opensource.org/license/mit/"
+                name = "The Apache License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "https://www.apache.org/licenses/LICENSE-2.0.txt"
             }
         }
         developers {
@@ -100,10 +99,21 @@ mavenPublishing {
             }
         }
         scm {
-            url = "https://github.com/cjfsss"
+            url = "https://github.com/cjfsss/MultiplatformDateTimePlus/"
             connection = "scm:git:git://github.com/cjfsss/MultiplatformDateTimePlus.git"
-            developerConnection = "scm:git:ssh://git@github.com/cjfsss/MultiplatformDateTimePlus.git"
+            developerConnection =
+                "scm:git:ssh://git@github.com/cjfsss/MultiplatformDateTimePlus.git"
         }
     }
 }
-
+// 在 build.gradle.kts 中添加
+//signing {
+//    // 使用环境变量中的 GPG 密钥
+//    val signingKey: String? by project
+//    val signingPassword: String? by project
+//
+//    if (signingKey != null && signingPassword != null) {
+//        useInMemoryPgpKeys(signingKey, signingPassword)
+//        sign(publishing.publications["kotlinMultiplatform"])
+//    }
+//}
