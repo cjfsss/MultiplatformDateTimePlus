@@ -71,12 +71,12 @@ android {
     }
 }
 group = "io.github.cjfsss"
-version = "1.0.0"
+version = "1.0.1"
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 //    publishToMavenCentral("DEFAULT", true)
     signAllPublications()
-    coordinates("io.github.cjfsss", "hos-datetime", "1.0.0")
+    coordinates("io.github.cjfsss", "hos-datetime", "1.0.1")
     pom {
         name = "Kotlinx datetime Plus"
         description =
