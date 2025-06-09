@@ -1,103 +1,113 @@
-**一个提供 `kotlinx-datetime` 扩展函数的 Kotlin Multiplatform 库。**
+# MultiplatformDateTimePlus Library Documentation
 
-### Minimum SDk 最小 SDk
+## Introduction
+`MultiplatformDateTimePlus` is a Kotlin Multiplatform library that provides extension functions for `kotlinx-datetime`, helping developers handle dates and times more conveniently.
 
+## Resource Links
+- **English Documentation**: [https://github.com/cjfsss/MultiplatformDateTimePlus](https://github.com/cjfsss/MultiplatformDateTimePlus)
+- **Chinese Documentation**: [https://github.com/cjfsss/MultiplatformDateTimePlus/blob/master/README-ZN.md](https://github.com/cjfsss/MultiplatformDateTimePlus/blob/master/README-ZN.md)
+- **GitHub Repository**: [https://github.com/cjfsss/MultiplatformDateTimePlus](https://github.com/cjfsss/MultiplatformDateTimePlus)
 
+## Compatibility
+The `minSdk` is 26.
 
-- minSdk is 26 minSdk 为 26
-
-### Implementation
-
+## Dependency Introduction
+Add the following dependencies to your project:
 ```kotlin
-implementation("")
+implementation("io.github.cjfsss:hos-datetime:1.0.1")
+implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
 ```
 
+## Test Examples
+- **DateTime Test**: [DateTimeTest](https://github.com/cjfsss/MultiplatformDateTimePlus/blob/master/shared/src/commonTest/kotlin/DateTimeTest.kt)
+- **DateTimeFormats Test**: [DateTimeFormatsTest](https://github.com/cjfsss/MultiplatformDateTimePlus/blob/master/shared/src/commonTest/kotlin/DateTimeFormatsTest.kt)
+- **LocalDateTimePlus Test**: [LocalDateTimePlusTest](https://github.com/cjfsss/MultiplatformDateTimePlus/blob/master/shared/src/commonTest/kotlin/LocalDateTimePlusTest.kt)
 
-## DateTime 方法说明
+## 🔧 Detailed Explanation of the DateTime Class
+
+### Constructors
+| Method Name | Parameters | Description |
+| --- | --- | --- |
+| `DateTime(localDateTime: LocalDateTime, timeZone: TimeZone = TimeZone.currentSystemDefault())` | `localDateTime`: of type `LocalDateTime`; `timeZone`: of type `TimeZone`, defaulting to the system's default time zone | A private constructor that creates a `DateTime` object using `LocalDateTime` and a time zone |
+| `DateTime(year: Int, month: Month, dayOfMonth: Int, hour: Int, minute: Int, second: Int = 0, nanosecond: Int = 0, timeZone: TimeZone = TimeZone.currentSystemDefault())` | `year`: year; `month`: month; `dayOfMonth`: day; `hour`: hour; `minute`: minute; `second`: second, defaulting to 0; `nanosecond`: nanosecond, defaulting to 0; `timeZone`: time zone, defaulting to the system's default time zone | Creates a `DateTime` object using year, month, day, hour, minute, second, nanosecond, and time zone |
+| `DateTime(millis: Long = 0, timeZone: TimeZone = TimeZone.currentSystemDefault())` | `millis`: number of milliseconds, defaulting to 0; `timeZone`: time zone, defaulting to the system's default time zone | Creates a `DateTime` object using the number of milliseconds and a time zone |
+
+### Instance Methods
+| Method Name | Parameters | Return Type | Description |
+| --- | --- | --- | --- |
+| `setYearMonthDay(year: Int, month: Int = 1, dayOfMonth: Int = 1)` | `year`: year; `month`: month, defaulting to January; `dayOfMonth`: day, defaulting to the 1st | A `DateTime` object | Sets the year, month, and day |
+| `setHourMinuteSecond(hour: Int, minute: Int = 0, second: Int = 0)` | `hour`: hour; `minute`: minute, defaulting to 0; `second`: second, defaulting to 0 | A `DateTime` object | Sets the hour, minute, and second |
+| `set(value: Int, unit: DateTimeUnit)` | `value`: time value; `unit`: time unit | A `DateTime` object | Sets the value of the specified time unit |
+| `add(value: Int, unit: DateTimeUnit)` | `value`: time value; `unit`: time unit | A `DateTime` object | Increases the value of the specified time unit |
+| `subtract(value: Int, unit: DateTimeUnit)` | `value`: time value; `unit`: time unit | A `DateTime` object | Decreases the value of the specified time unit |
+| `toEpochMilliseconds(timeZone: TimeZone = this.timeZone)` | `timeZone`: time zone, defaulting to the current object's time zone | A `Long` type | Converts to Epoch milliseconds |
+| `year()` | None | An `Int` type | Gets the year |
+| `monthNumber()` | None | An `Int` type | Gets the month number |
+| `month()` | None | A `Month` type | Gets the month enum |
+| `day()` | None | An `Int` type | Gets the day |
+| `dayOfWeek()` | None | A `DayOfWeek` type | Gets the day of the week |
+| `dayOfYear()` | None | An `Int` type | Gets the day of the year |
+| `hour()` | None | An `Int` type | Gets the hour |
+| `minute()` | None | An `Int` type | Gets the minute |
+| `second()` | None | An `Int` type | Gets the second |
+| `countMondaysInMonth()` | None | An `Int` type | Calculates the number of Mondays in the current month |
+| `countWeeksInMonth()` | None | An `Int` type | Calculates the number of weeks in the current month |
+| `countWeeksMondayInMonth()` | None | An `Int` type | Calculates the number of weeks starting on a Monday in the current month |
+| `getWeekFirstDayInMonth()` | None | A `MutableList<DateTime>` type | Gets the first Sunday of each month |
+| `startYear()` | None | A `DateTime` object | Sets to the start time of the current year |
+| `endYear()` | None | A `DateTime` object | Sets to the end time of the current year |
+| `startMonth()` | None | A `DateTime` object | Sets to the start time of the current month |
+| `endMonth()` | None | A `DateTime` object | Sets to the end time of the current month |
+| `startWeek()` | None | A `DateTime` object | Sets to the start time of the current week |
+| `endWeek()` | None | A `DateTime` object | Sets to the end time of the current week |
+| `startDay()` | None | A `DateTime` object | Sets to the start time of the current day |
+| `endDay()` | None | A `DateTime` object | Sets to the end time of the current day |
+| `yesterday()` | None | A `DateTime` object | Gets the time of yesterday |
+| `yesterdayBefore()` | None | A `DateTime` object | Gets the time of the day before yesterday |
+| `tomorrow()` | None | A `DateTime` object | Gets the time of tomorrow |
+| `tomorrowAfter()` | None | A `DateTime` object | Gets the time of the day after tomorrow |
+| `subtractYear(time: Int)` | `time`: number of years | A `DateTime` object | Decreases the specified number of years |
+| `subtractMonth(time: Int)` | `time`: number of months | A `DateTime` object | Decreases the specified number of months |
+| `subtractDay(time: Int)` | `time`: number of days | A `DateTime` object | Decreases the specified number of days |
+| `subtractHour(time: Int)` | `time`: number of hours | A `DateTime` object | Decreases the specified number of hours |
+| `subtractMinute(time: Int)` | `time`: number of minutes | A `DateTime` object | Decreases the specified number of minutes |
+| `subtractSecond(time: Int)` | `time`: number of seconds | A `DateTime` object | Decreases the specified number of seconds |
+| `subtractHour1()` | None | A `DateTime` object | Decreases by 1 hour |
+| `subtractMinute30()` | None | A `DateTime` object | Decreases by 30 minutes |
+| `subtractDay30()` | None | A `DateTime` object | Decreases by 30 days |
+| `subtractDay7()` | None | A `DateTime` object | Decreases by 7 days |
+| `addYear(time: Int)` | `time`: number of years | A `DateTime` object | Increases the specified number of years |
+| `addMonth(time: Int)` | `time`: number of months | A `DateTime` object | Increases the specified number of months |
+| `addDay(time: Int)` | `time`: number of days | A `DateTime` object | Increases the specified number of days |
+| `addHour(time: Int)` | `time`: number of hours | A `DateTime` object | Increases the specified number of hours |
+| `addMinute(time: Int)` | `time`: number of minutes | A `DateTime` object | Increases the specified number of minutes |
+| `addSecond(time: Int)` | `time`: number of seconds | A `DateTime` object | Increases the specified number of seconds |
+| `isSame(dateTime: DateTime)` | `dateTime`: another `DateTime` object | A `Boolean` type | Checks if two times are the same |
+| `isBefore(end: DateTime)` | `end`: a specified `DateTime` object | A `Boolean` type | Checks if the current time is before the specified time |
+| `isAfter(start: DateTime)` | `start`: a specified `DateTime` object | A `Boolean` type | Checks if the current time is after the specified time |
+| `monthSize()` | None | An `Int` type | Gets the number of days in the current month |
+| `formatString(pattern: DateTimeFormats.Format = DateTimeFormats.Format.FULL)` | `pattern`: time format, defaulting to the full format | A `String` type | Formats the time as a string |
+| `format(pattern: DateTimeFormats.Format = DateTimeFormats.Format.FULL)` | `pattern`: time format, defaulting to the full format | A `String` type | Formats the time as a string |
+
+### Static Methods
+| Method Name | Parameters | Return Type | Description |
+| --- | --- | --- | --- |
+| `now(millis: Long = 0, timeZone: TimeZone = TimeZone.currentSystemDefault())` | `millis`: number of milliseconds, defaulting to 0; `timeZone`: time zone, defaulting to the system's default time zone | A `DateTime` object | Creates a `DateTime` object using the given number of milliseconds and time zone |
+| `now(year: Int, month: Month, dayOfMonth: Int, hour: Int, minute: Int, second: Int = 0, nanosecond: Int = 0, timeZone: TimeZone = TimeZone.currentSystemDefault())` | `year`: year; `month`: month; `dayOfMonth`: day; `hour`: hour; `minute`: minute; `second`: second, defaulting to 0; `nanosecond`: nanosecond, defaulting to 0; `timeZone`: time zone, defaulting to the system's default time zone | A `DateTime` object | Creates a `DateTime` object using the given date and time parameters |
+| `parse(time: String, pattern: DateTimeFormats.Format? = DateTimeFormats.Format.getFormatString(time), value: String = "")` | `time`: time string; `pattern`: time format, if not provided, it will be automatically determined based on the time string; `value`: additional string for parsing, defaulting to an empty string | A `DateTime` object | Parses a `DateTime` object using the given time string and format |
+| `parse2Millis(time: String, pattern: DateTimeFormats.Format? = DateTimeFormats.Format.getFormatString(time), value: String = "")` | `time`: time string; `pattern`: time format, if not provided, it will be automatically determined based on the time string; `value`: additional string for parsing, defaulting to an empty string | A `Long` type | Converts the time string to a millisecond timestamp |
+| `parseConvert(time: String, from: DateTimeFormats.Format? = DateTimeFormats.Format.getFormatString(time), to: DateTimeFormats.Format = DateTimeFormats.Format.FULL)` | `time`: time string; `from`: source format pattern for parsing the time string; `to`: target format pattern, defaulting to the full date and time format | A `String` type | Converts the time format |
+| `getNowMills(timeZone: TimeZone = TimeZone.currentSystemDefault())` | `timeZone`: specified time zone, defaulting to the system's default time zone | A `Long` type | Gets the number of milliseconds of the current time |
+| `isLeapYear(year: Int)` | `year`: year | A `Boolean` type | Checks if the specified year is a leap year |
+| `getContent(millis: Long = 0, timeZone: TimeZone = TimeZone.currentSystemDefault(), content: DateTime.() -> T)` | `millis`: number of milliseconds of time, defaulting to 0, representing the current time; `timeZone`: time zone, defaulting to the system's current time zone; `content`: processing logic for the date and time, returning any type `T` | A `T` type | Gets the current time content based on the specified number of milliseconds of time and time zone |
+| `setContent(millis: Long = 0, timeZone: TimeZone = TimeZone.currentSystemDefault(), content: DateTime.() -> T)` | `millis`: number of milliseconds of time, defaulting to 0, representing the current time; `timeZone`: time zone, defaulting to the system's current time zone; `content`: processing logic for the date and time, with no return value | None | Sets the timestamp of the content |
+| `parseContent(time: String, pattern: DateTimeFormats.Format? = DateTimeFormats.Format.getFormatString(time), value: String = "", content: DateTime.() -> T)` | `time`: time string; `pattern`: time format, if not provided, it will be automatically obtained based on the time string; `value`: default value, used when parsing fails; `content`: processing logic for the date and time, returning any type `T` | A `T` type | Parses the content based on the specified time string, format, and default value |
+
 ---
 
-### 🔧 方法清单及功能描述
+## 🧩 Supported format types in the enumeration class `Format`
 
-| 编号 | 功能             | 方法/函数                                                                 |
-| ---- | ---------------- | -------------------------------------------------------------------------- |
-| 1    | 设置年份         | set(year, DateTimeUnit.YEAR)                                               |
-| 2    | 时间加减         | add(value, unit), subtract(value, unit)                                    |
-| 3    | 获取 Unix 时间戳 | toEpochMilliseconds()                                                      |
-| 4    | 获取年、月、日   | year(), monthNumber(), day()                                               |
-| 5    | 获取时、分、秒   | hour(), minute(), second()                                                 |
-| 6    | 获取年份起始时间 | startYear()                                                                |
-| 7    | 获取月份起始时间 | startMonth()                                                               |
-| 8    | 获取周起始时间   | startWeek()                                                                |
-| 9    | 获取天起始时间   | startDay()                                                                 |
-| 10   | 获取昨天/明天    | yesterday(), tomorrow()                                                    |
-| 11   | 时间比较         | isBefore(other), isAfter(other)                                            |
-| 12   | 时间格式化与解析 | format(pattern), parse(str, pattern)                                       |
-| 13   | 字符串转时间戳   | parse2Millis(str, pattern)                                                 |
-| 14   | 判断闰年         | isLeapYear(year)                                                           |
-
-## LocalDateTime 方法说明
-
----
-
-
-
-
-| 序号 | 方法名               | 功能描述                     |
-|------|----------------------|------------------------------|
-| 1    | set(value, unit)     | 设置年、月、日、时、分、秒等单位值 |
-| 2    | add(value, unit)     | 添加时间单位                 |
-| 3    | subtract(value, unit)| 减去时间单位                 |
-| 4    | toEpochMilliseconds()| 转换为 Unix 时间戳           |
-| 5    | day()                | 获取日期中的“天”             |
-| 6    | startDay()           | 设置为当天开始时间           |
-| 7    | endDay()             | 设置为当天结束时间           |
-| 8    | startMonth()         | 设置为当月第一天             |
-| 9    | endMonth()           | 设置为当月最后一天           |
-| 10   | startYear()          | 设置为当年第一天             |
-| 11   | endYear()            | 设置为当年最后一天           |
-| 12   | startWeek()          | 设置为当周第一天（周一）     |
-| 13   | endWeek()            | 设置为当周最后一天（周日）   |
-| 14   | yesterday()          | 获取昨天的时间               |
-| 15   | tomorrow()           | 获取明天的时间               |
-| 16   | isSame(other)        | 判断两个时间是否相同         |
-| 17   | isBefore(other)      | 判断当前时间是否在指定时间之前 |
-| 18   | isAfter(other)       | 判断当前时间是否在指定时间之后 |
-| 19   | monthSize()          | 获取当月总天数               |
-| 20   | countMondaysInMonth()| 获取当月星期一数量           |
-| 21   | getWeekFirstDayInMonth() | 获取当月每周的第一个星期一   |
-| 22   | countWeeksInMonth()   | 计算当月的完整周数           |
-| 23   | countWeeksMondayInMonth() | 计算以周一开头的周数       |
-| 24   | format(pattern)      | 使用指定格式格式化时间       |
-| 25   | formatString(pattern)| 同上                         |
-| 26   | parse2Millis(...)    | 将字符串转为时间戳           |
-| 27   | parseConvert(...)    | 时间格式转换                 |
-| 28   | isLeapYear(year)     | 判断是否为闰年               |
-| 29   | setContent(...)      | 在特定时间执行内容块         |
-| 30   | getContent(...)      | 获取特定时间上下文下的结果   |
-| 31   | getNowMills(...)     | 获取当前时间戳               |
-
-
-## DateTimeFormats 方法说明
-
----
-
-
-| 序号 | 方法名                          | 功能描述                                      |
-|------|-------------------------------|---------------------------------------------|
-| 1    | getFormatString(time: String)  | 根据输入字符串自动识别日期格式模式            |
-| 2    | `format(time: String?, value: String = "")` | 对时间字符串进行预处理（去特殊字符、替换等）  |
-| 3    | parseDateTimeComponents(...)    | 使用当前格式解析为 `DateTimeComponents`       |
-| 4    | parseLocalDateTime(...)         | 使用当前格式解析为 `LocalDateTime`            |
-| 5    | toEpochMilliseconds()           | 将 `LocalDateTime` 转换为 Unix 时间戳（毫秒） |
-| 6    | parseConvert(...)               | 在不同格式之间转换时间字符串                  |
-| 7    | parse2Millis(...)               | 解析时间字符串并返回其对应的时间戳            |
-
----
-
-
-## 🧩 枚举类 `Format` 中支持的格式类型
-
-| 名称             | 模式                          | 示例                          |
+| Name             | Pattern                       | Example                       |
 | ---------------- | ----------------------------- | ----------------------------- |
 | `FULL_S`         | `yyyyMMddHHmmss`              | `20230101123045`              |
 | `FULL`           | `yyyy-MM-dd HH:mm:ss`         | `2023-01-01 12:30:45`         |
@@ -126,3 +136,19 @@ implementation("")
 
 ---
 
+## License
+```
+Copyright 2017 Xiho
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
